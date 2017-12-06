@@ -16,5 +16,7 @@ namespace firestorm.DAL
 
         public DbSet<Assay> Assays { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Company> Companies { get; set; }
     }
 }
