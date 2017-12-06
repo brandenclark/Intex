@@ -7,7 +7,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace firestorm.Models
 {
+    [Table("Priority")]
     public class Priority
     {
+        [Key]
+        public string PriorityName { get; set; }
+
     }
 }

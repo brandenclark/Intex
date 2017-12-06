@@ -7,7 +7,26 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace firestorm.Models
 {
+    [Table("Ticket")]
     public class Ticket
     {
+        [Key]
+        public int TicketID { get; set; }
+        public DateTime DateSubmitted { get; set; }
+        public DateTime DateResolved { get; set; }
+
+        [ForeignKey("Priority")]
+        public virtual string PriorityName { get; set; }
+        public virtual Priority Priority { get; set; }
+
+        [ForeignKey("WorkOrder")]
+        public virtual int OrderID { get; set; }
+        public virtual WorkOrder WorkOrder { get; set; }
+
+        [ForeignKey("User")]
+        public virtual int UserID { get; set; }
+        public virtual User User { get; set; }
+
+        public string Comment { get; set; }
     }
 }
