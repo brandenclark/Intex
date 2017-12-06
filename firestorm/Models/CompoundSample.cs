@@ -11,14 +11,12 @@ namespace firestorm.Models
     [Table("CompoundSample")]
     public class CompoundSample
     {
-        [Key]
-        [Column(Order=1)]
+        [Key, Column(Order = 0), ForeignKey("Compound")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        //[ForeignKey("Compound")]
         public int LT { get; set; }
-        //public virtual Compound Compound { get; set; }
+        public virtual Compound Compound { get; set; }
 
-        [Key]
+        [Key, Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SequenceCode { get; set; }
 
@@ -36,7 +34,6 @@ namespace firestorm.Models
         public String AssayID { get; set; }
         public virtual Assay Assay { get; set; }
 
-        //Add WorkOrder
         [ForeignKey("WorkOrder")]
         public int OrderID { get; set; }
         public virtual WorkOrder WorkOrder { get; set; }
