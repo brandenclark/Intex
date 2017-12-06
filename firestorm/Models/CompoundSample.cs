@@ -14,9 +14,9 @@ namespace firestorm.Models
         [Key]
         [Column(Order=1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [ForeignKey("Compound")]
+        //[ForeignKey("Compound")]
         public int LT { get; set; }
-        public virtual Compound compound { get; set; }
+        //public virtual Compound Compound { get; set; }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
