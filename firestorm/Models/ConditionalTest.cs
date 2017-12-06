@@ -7,7 +7,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace firestorm.Models
 {
+    [Table("ConditionalTest")]
     public class ConditionalTest
     {
+
+
     }
 }
