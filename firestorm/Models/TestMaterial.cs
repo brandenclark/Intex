@@ -11,11 +11,11 @@ namespace firestorm.Models
     public class TestMaterial
     {
         [ForeignKey("Test")]
-        public int TestID { get; set; }
+        public virtual int TestID { get; set; }
         public virtual Test Test { get; set; }
 
         [ForeignKey("Material")]
-        public int MaterialID { get; set; }
+        public virtual int MaterialID { get; set; }
         public virtual Material Material { get; set; }
     }
 }
