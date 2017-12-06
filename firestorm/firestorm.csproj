@@ -154,9 +154,28 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Assay.cs" />
+    <Compile Include="Models\AssayTest.cs" />
+    <Compile Include="Models\CatalogReference.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\Compound.cs" />
+    <Compile Include="Models\CompoundSample.cs" />
+    <Compile Include="Models\ConditionalTest.cs" />
+    <Compile Include="Models\DataReport.cs" />
+    <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Models\Material.cs" />
+    <Compile Include="Models\Payment.cs" />
+    <Compile Include="Models\Priority.cs" />
+    <Compile Include="Models\Report.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\SampleTest.cs" />
+    <Compile Include="Models\SummaryReport.cs" />
+    <Compile Include="Models\Test.cs" />
+    <Compile Include="Models\TestMaterial.cs" />
+    <Compile Include="Models\TestReport.cs" />
+    <Compile Include="Models\TestResult.cs" />
+    <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\WorkOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
