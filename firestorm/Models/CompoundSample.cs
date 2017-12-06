@@ -37,6 +37,9 @@ namespace firestorm.Models
         public virtual Assay Assay { get; set; }
 
         //Add WorkOrder
+        [ForeignKey("WorkOrder")]
+        public int OrderID { get; set; }
+        public virtual WorkOrder WorkOrder { get; set; }
 
 
 
