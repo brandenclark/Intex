@@ -16,6 +16,5 @@ namespace firestorm.DAL
 
         public DbSet<Assay> Assays { get; set; }
         public DbSet<User> Users { get; set; }
-    }//Kiersten checking in
-    //kei
+    }
 }
