@@ -164,6 +164,7 @@
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Compound.cs" />
     <Compile Include="Models\CompoundSample.cs" />
+    <Compile Include="Models\CompoundSampleSampleTest.cs" />
     <Compile Include="Models\ConditionalTest.cs" />
     <Compile Include="Models\DataReport.cs" />
     <Compile Include="Models\Invoice.cs" />
@@ -248,6 +249,10 @@
     <Content Include="Views\Customer\RequestOrder.cshtml" />
     <Content Include="Views\Customer\RequestOrderNumber.cshtml" />
     <Content Include="Views\Management\SummaryReport.cshtml" />
+    <Content Include="Views\Lab\ScheduleTest.cshtml" />
+    <Content Include="Views\Management\CreateTicket.cshtml" />
+    <Content Include="Views\Management\ManageTickets.cshtml" />
+    <Content Include="Views\Management\ResolveTicket.cshtml" />
     <Content Include="Views\Lab\DisplayTests.cshtml" />
     <Content Include="Views\Lab\CreateTTube.cshtml" />
   </ItemGroup>
