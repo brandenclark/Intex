@@ -18,5 +18,11 @@ namespace firestorm.DAL
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Company> Companies { get; set; }
+
+        public System.Data.Entity.DbSet<firestorm.Models.CompoundSample> CompoundSamples { get; set; }
+
+        public System.Data.Entity.DbSet<firestorm.Models.Compound> Compounds { get; set; }
+
+        public System.Data.Entity.DbSet<firestorm.Models.WorkOrder> WorkOrders { get; set; }
     }
 }
