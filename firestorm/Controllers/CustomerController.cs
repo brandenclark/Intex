@@ -19,6 +19,11 @@ namespace firestorm.Controllers
         private Thunderstorm db = new Thunderstorm();
         static public WorkOrderCompoundSample workOrderCompoundSample;
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult RequestOrderNumber()
         {
           
@@ -118,11 +123,23 @@ namespace firestorm.Controllers
         {
             return View();
         }
+
+
         public ActionResult TrackOrder()
         {
             User user = db.Users.Find(Convert.ToInt32(Request.Cookies["UserID"].Value));
-            
-            return View();
+
+            ViewBag.CompanyName = user.Company.Name;
+
+            var orders = db.Database.SqlQuery<WorkOrder>
+                ("SELECT * " +
+                "FROM WorkOrder" +
+                "WHERE CompanyID = " + user.CompanyID).ToList();
+
+            return View(orders);
         }
+
+
+
     }
 }
