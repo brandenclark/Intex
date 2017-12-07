@@ -4,5 +4,30 @@
     Layout = "~/Views/Shared/Sales_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="jumbotron">
+    <h1>ようこそ Sales Page</h1>
+    <p class="lead">You can manage Request Order, Ticketing, and Active Orders here!</p>
+</div>
+
+<div class="LandingImgDiv">
+    <img src="~/Content/Images/ManagementPhoto.jpg" class="LandingImg" />
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Request Order</h2>
+        <p>Yeah! New Order!</p>
+        <p><a class="btn btn-primary" href="@Url.Action("RequestOrder", "Sales")">Request Order</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Ticketing</h2>
+        <p>See ticketing system</p>
+        <p><a class="btn btn-primary" href="@Url.Action("Ticketing", "Sales")">Ticketing </a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Active Orders</h2>
+        <p>Let's be active!</p>
+        <p><a class="btn btn-primary" href="@Url.Action("ActiveOrders", "Sales")">Active Orders</a></p>
+    </div>
+</div>
 

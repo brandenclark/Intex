@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace firestorm.Models
 {
+    [Table("Company")]
     public class Company
     {
         [Key]
