@@ -168,6 +168,7 @@
     <Compile Include="Models\DataReport.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\Material.cs" />
+    <Compile Include="Models\NewTestTube.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Models\Report.cs" />
@@ -247,6 +248,8 @@
     <Content Include="Views\Customer\RequestOrder.cshtml" />
     <Content Include="Views\Customer\RequestOrderNumber.cshtml" />
     <Content Include="Views\Management\SummaryReport.cshtml" />
+    <Content Include="Views\Lab\DisplayTests.cshtml" />
+    <Content Include="Views\Lab\CreateTTube.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
