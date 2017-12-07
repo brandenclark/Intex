@@ -15,7 +15,7 @@ namespace firestorm.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TestTubeID { get; set; }
-        public float Concentration { get; set; }
+        public double Concentration { get; set; }
 
         [DisplayName("Scheduled Date")]
         public DateTime? ScheduledDate { get; set; }

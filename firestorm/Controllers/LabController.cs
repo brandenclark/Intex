@@ -29,15 +29,17 @@ namespace firestorm.Controllers
         }
         public ActionResult DisplayTests()
         {
-            IEnumerable<NewTestTube> test= db.Database.SqlQuery<NewTestTube>("SELECT [Assay.AssayID], [Assay.Name]," +
-                "[CompoundSample.SequenceCode], [CompoundSample.LT], [CompoundSample.DateDue], [Test.TestID] " +
-                "FROM [Assay], [Test], [CompoundSample], [AssayTest]" +
-                "WHERE [Test.TestID] = [AssayTest.TestID] AND [AssayTest.AssayID] = [Assay.AssayID] " +
-                "AND [Assay.AssayID] = [CompoundSample.AssayID]");
+            IEnumerable<NewTestTube> test= db.Database.SqlQuery<NewTestTube>("SELECT * " +
+                "FROM Assay, Test, CompoundSample, AssayTest, SampleTest " +
+                "WHERE Test.TestID = AssayTest.TestID AND AssayTest.AssayID = Assay.AssayID " +
+                "AND Assay.AssayID = CompoundSample.AssayID AND AssayTest.AssayID = CompoundSample.AssayID " +
+                "AND Assay.AssayID = SampleTest.AssayID AND SampleTest.AssayID = CompoundSample.AssayID " +
+                "AND AssayTest.AssayID = SampleTest.AssayID AND Test.TestID = SampleTest.TestID " +
+                "AND AssayTest.TestID = SampleTest.TestID");
             return View(test);
         }
         //Edit
-        public ActionResult CreateTTube(int? id, int? lt, int? sc, string asid)
+        public ActionResult CreateTTube(int? id, int? lt, int? sc, string asid, int? ttid)
         {
             if (id == null)
             {
@@ -55,13 +57,12 @@ namespace firestorm.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Test atest = db.Tests.Find(id);
-            SampleTest newsampletest = new SampleTest();
-            newsampletest.AssayID = asid;
-            newsampletest.LT = lt;
-            newsampletest.SequenceCode = sc;
-            newsampletest.TestID = id ?? default(int);
-            return View(newsampletest);
+            if (ttid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SampleTest atest = db.SampleTests.Find(ttid);
+            return View(atest);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
