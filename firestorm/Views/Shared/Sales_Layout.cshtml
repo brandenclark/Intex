@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>Northwest Labs</title>
 
 
     @Styles.Render("~/Content/css")
@@ -22,20 +22,29 @@
                     <span class="icon-bar"></span>
 
                 </button>
-                @Html.ActionLink("Northwest Labs", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Northwest Labs", "Index", "Sales", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Request Order", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Active Orders", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact Support", "Contact", "Home")</li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Manage Orders
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("RequestOrder", "Sales")">Request Order</a></li>
+                            <li><a href="@Url.Action("UpdateOrder", "Sales")">Update Order</a></li>
+                            <li><a href="@Url.Action("ActiveOrder", "Sales")">Active Order</a></li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Create Ticket", "CreateTicket", "Sales")</li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Northwest Labs Pharmaceutical</p>

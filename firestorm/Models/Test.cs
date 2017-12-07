@@ -14,6 +14,6 @@ namespace firestorm.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int TestID { get; set; }
         public String TestName { get; set; }
-        public decimal Cost { get; set; }
+        public decimal? Cost { get; set; }
     }
 }

@@ -28,6 +28,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Request Order", "RequestOrderNumber", "Customer")</li>
                     <li>@Html.ActionLink("Active Orders", "TrackOrder", "Customer")</li>
+                    <li>@Html.ActionLink("Data Results", "DataResults", "Customer")</li>
                     <li>@Html.ActionLink("Contact Support", "Index", "Home")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -42,7 +43,6 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Northwest Labs Pharmaceutical</p>

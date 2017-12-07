@@ -26,6 +26,11 @@ namespace firestorm.Controllers
             return View();
         }
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult RequestOrderNumber()
         {
             user = db.Users.Find(Int32.Parse(Request.Cookies["UserID"].Value));
@@ -209,9 +214,20 @@ namespace firestorm.Controllers
             ViewBag.Name = Name;
             return View();
         }
+
+
         public ActionResult TrackOrder()
         {
-            return View();
+            User user = db.Users.Find(Convert.ToInt32(Request.Cookies["UserID"].Value));
+
+            ViewBag.CompanyName = user.Company.Name;
+
+            var orders = db.Database.SqlQuery<WorkOrder>("SELECT * FROM WorkOrder WHERE CompanyID = " + user.CompanyID).ToList();
+
+            return View(orders);
         }
+
+
+
     }
 }
