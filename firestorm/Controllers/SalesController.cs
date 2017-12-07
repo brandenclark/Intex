@@ -18,6 +18,7 @@ namespace firestorm.Controllers
         // GET: Sales
         public ActionResult Index()
         {
+
             return View();
         }
     }
