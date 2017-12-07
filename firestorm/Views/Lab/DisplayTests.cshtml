@@ -39,7 +39,9 @@
         <td>
             @Html.DisplayFor(modelitem => item.Name)
         </td>
-        @Html.ActionLink("Test", "CreateTTube", new { id = item.TestID, lt=item.LT, sc=item.SequenceCode, asid=item.AssayID });
+        <td>
+            @Html.ActionLink("Schedule Test " + item.TestID + '-' + item.TestTubeID, "CreateTTube", new { id = item.TestID, lt = item.LT, sc = item.SequenceCode, asid = item.AssayID, ttid = item.TestTubeID})
+        </td>
     </tr>
     }
 

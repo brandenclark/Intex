@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
 
 namespace firestorm.Models
 {
@@ -13,7 +14,9 @@ namespace firestorm.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UserID { get; set; }
+        [DisplayName("First Name")]
         public String FirstName { get; set; }
+        [DisplayName("Last Name")]
         public String LastName { get; set; }
         public String Phone { get; set; }
         public String Email { get; set; }
