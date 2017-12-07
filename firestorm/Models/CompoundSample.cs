@@ -29,18 +29,15 @@ namespace firestorm.Models
         public DateTime DateDue { get; set; }
         public String Appearance { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a weight of compound")]
         [DisplayName("Weight of Compound")]
         public int Weight { get; set; }
 
         public float MolMass { get; set; }
 
         [Required]
-        [DisplayName("Do you authroize any additional tests as needed?")]
+        [DisplayName("Authorize additional tests based upon test outcome.")]
         public bool AuthAddTest { get; set; }
-
-        [Required]
-        public DateTime ScheduledDate { get; set; }
 
         [ForeignKey("Assay")]
         public String AssayID { get; set; }

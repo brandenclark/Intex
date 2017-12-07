@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using firestorm.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
 
 namespace firestorm.Models
 {
@@ -14,7 +16,10 @@ namespace firestorm.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int TestTubeID { get; set; }
         public float Concentration { get; set; }
- 
+
+        [DisplayName("Scheduled Date")]
+        public DateTime ScheduledDate { get; set; }
+
         [ForeignKey("CompoundSample"), Column(Order = 0)]
         public virtual int? LT { get; set; }
 

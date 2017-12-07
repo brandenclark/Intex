@@ -27,29 +27,50 @@ namespace firestorm.Controllers
         {
             return View();
         }
-        //GET: CompoundSample/Create
-        public ActionResult ScheduleTest()
+        public ActionResult DisplayTests()
         {
-            ViewBag.LT = new SelectList(db.Compounds, "LT", "LT");
-            ViewBag.AssayID = new SelectList(db.Assays, "AssayID", "AssayID");
-            ViewBag.OrderID = new SelectList(db.WorkOrders, "OrderID", "OrderID");
-            return View();
+            var test = db.SampleTests;
+            return View(test.ToList());
+        }
+        //GET: SampleTest/Details
+        public ActionResult ScheduleTest(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SampleTest test = db.SampleTests.Find(id);
+            if (test == null)
+            {
+                return HttpNotFound();
+            }
+            return View(test);
+        }
+        //GET SampleTest/Edit
+        public ActionResult TestEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SampleTest test = db.SampleTests.Find(id);
+            if (test == null)
+            {
+                return HttpNotFound();
+            }
+            return View(test);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ScheduleTest([Bind(Include = "LT,SequenceCode,QuantityMG,DateArrived,ReceivedBy,DateDue,Appearance,Weight,MolMass,AuthAddTest,ScheduledDate,AssayID,OrderID")] CompoundSample cs)
+        public ActionResult Edit([Bind(Include = "TestTubeID,Concentration,LT,SequenceCode,AssayID,TestID")] SampleTest test)
         {
             if (ModelState.IsValid)
             {
-               // db.comAdd(cs);
+                db.Entry(test).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.LT = new SelectList(db.Compounds, "LT","LT", cs.LT);
-            ViewBag.AssayID = new SelectList(db.Assays, "AssayID", "AssayID", cs.AssayID);
-            ViewBag.OrderID = new SelectList(db.WorkOrders, "OrderID", "OrderID", cs.OrderID);
-            return View(cs);
+            return View(test);
         }
         public ActionResult UpdateTest()
         {
