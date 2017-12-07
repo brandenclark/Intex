@@ -14,6 +14,7 @@ namespace firestorm.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int TicketID { get; set; }
+        [DisplayName("Date Submitted")]
         public DateTime DateSubmitted { get; set; }
         public DateTime? DateResolved { get; set; }
 
@@ -21,11 +22,12 @@ namespace firestorm.Models
         public virtual string PriorityName { get; set; }
         public virtual Priority Priority { get; set; }
 
+        [DisplayName("Order ID")]
         [ForeignKey("WorkOrder")]
-        [DisplayName("Submitted by")]
         public virtual int OrderID { get; set; }
         public virtual WorkOrder WorkOrder { get; set; }
 
+        [DisplayName("Submitted by")]
         [ForeignKey("User")]
         public virtual int UserID { get; set; }
         public virtual User User { get; set; }
