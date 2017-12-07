@@ -14,8 +14,12 @@ namespace firestorm.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public String AssayID { get; set; }
-        [DisplayName("Assay Name")]
+
+
+        [DisplayName("Please type the Assay Name")]
         public String Name { get; set; }
+
+        [DisplayName("Please type the Assay Procedure")]
         public String Procedure { get; set; }
     }
 }
