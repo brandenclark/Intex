@@ -35,12 +35,9 @@ namespace firestorm.Models
 
         public float MolMass { get; set; }
 
-        [Required(ErrorMessage = "Please enter yes or no")]
-        [DisplayName("Do you authroize any additional tests as needed?")]
+        [Required]
+        [DisplayName("Authorize additional tests based upon test outcome.")]
         public bool AuthAddTest { get; set; }
-
-        [Required(ErrorMessage = "Please enter a Scheduled date")]
-        public DateTime ScheduledDate { get; set; }
 
         [ForeignKey("Assay")]
         public String AssayID { get; set; }

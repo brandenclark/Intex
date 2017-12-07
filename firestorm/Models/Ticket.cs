@@ -11,9 +11,10 @@ namespace firestorm.Models
     public class Ticket
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int TicketID { get; set; }
         public DateTime DateSubmitted { get; set; }
-        public DateTime DateResolved { get; set; }
+        public DateTime? DateResolved { get; set; }
 
         [ForeignKey("Priority")]
         public virtual string PriorityName { get; set; }
@@ -28,5 +29,16 @@ namespace firestorm.Models
         public virtual User User { get; set; }
 
         public string Comment { get; set; }
+        public string Response { get; set; }
+
+        public Ticket()
+        {
+
+        }
+
+        public Ticket(DateTime dateSubmitted, int userID, string Comment)
+        {
+
+        }
     }
 }
