@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
 
 namespace firestorm.Models
 {
@@ -21,6 +22,7 @@ namespace firestorm.Models
         public virtual Priority Priority { get; set; }
 
         [ForeignKey("WorkOrder")]
+        [DisplayName("Submitted by")]
         public virtual int OrderID { get; set; }
         public virtual WorkOrder WorkOrder { get; set; }
 
