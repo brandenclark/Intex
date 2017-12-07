@@ -15,8 +15,7 @@ namespace firestorm.Controllers
     public class HomeController : Controller
     {
         private Thunderstorm db = new Thunderstorm();
-
-        
+   
         public ActionResult Index()
         {
             return View();
@@ -39,13 +38,13 @@ namespace firestorm.Controllers
                             "WHERE Email = '" + email + "' AND " +
                             "[Password] = '" + password + "'").First();
 
-            email = db.Database.SqlQuery<Role>("SELECT * FROM Role WHERE RoleID = " + currentUser.RoleID).First().Name;
+            String role = db.Database.SqlQuery<Role>("SELECT * FROM Role WHERE RoleID = " + currentUser.RoleID).First().Name;
 
             if (currentUser.UserID > 0)
             {
-                    FormsAuthentication.SetAuthCookie(email, rememberMe);
+                    FormsAuthentication.SetAuthCookie(role, rememberMe);
 
-                    return RedirectToAction("Index", "Home");             
+                return RedirectToAction("Index", role);             
              }
             else
             {
