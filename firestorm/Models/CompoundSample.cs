@@ -29,7 +29,7 @@ namespace firestorm.Models
         public DateTime DateDue { get; set; }
         public String Appearance { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a weight of compound")]
         [DisplayName("Weight of Compound")]
         public int Weight { get; set; }
 
