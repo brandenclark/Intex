@@ -26,7 +26,7 @@ namespace firestorm.Models
         public virtual string AssayID { get; set; }
 
         [ForeignKey("AssayTest"), Column(Order = 3)]
-        public virtual string TestID { get; set; }
+        public virtual int TestID { get; set; }
         public virtual AssayTest AssayTest { get; set; }
     }
 }

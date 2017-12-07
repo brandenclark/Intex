@@ -10,11 +10,11 @@ namespace firestorm.Models
     [Table("AssayTest")]
     public class AssayTest
     {
-        [ForeignKey("Assay"), Column(Order = 0)]
+        [Key, Column(Order = 0), ForeignKey("Assay")]
         public virtual string AssayID { get; set; }
         public virtual Assay Assay { get; set; }
 
-        [ForeignKey("Test"), Column(Order = 1)]
+        [Key, Column(Order = 1), ForeignKey("Test")]
         public virtual int TestID { get; set; }
         public virtual Test Test { get; set; }
 
