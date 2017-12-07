@@ -12,16 +12,17 @@ namespace firestorm.Models
     public class NewTestTube
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int TTID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int TestTubeID { get; set; }
         public String AssayID { get; set; }
-        public String TestID { get; set; }
+        public int TestID { get; set; }
         [DisplayName("Assay Name")]
         public String Name { get; set; }
-        public String LT { get; set; }
+        public int LT { get; set; }
         [DisplayName("Sequence Code")]
-        public String SequenceCode { get; set; }
+        public int SequenceCode { get; set; }
         [DisplayName("Desired Completion Date")]
-        public String DateDue { get; set; }
+        public DateTime? DateDue { get; set; }
+
     }
 }

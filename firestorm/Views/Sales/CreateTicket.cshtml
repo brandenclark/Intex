@@ -2,15 +2,15 @@
 
 @{
     ViewBag.Title = "Create Ticket";
-    Layout = "~/Views/Shared/Management_Layout.cshtml";
+    Layout = "~/Views/Shared/Sales_Layout.cshtml";
 }
 
 <h2>Create Ticket</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Ticket</h4>
         <hr />
@@ -51,3 +51,5 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+

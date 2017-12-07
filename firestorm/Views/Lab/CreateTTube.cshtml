@@ -16,8 +16,12 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.TestTubeID)
-
-
+        @Html.HiddenFor(model => model.SequenceCode)
+        @Html.HiddenFor(model => model.AssayID)
+        @Html.HiddenFor(model => model.TestID)
+        @Html.HiddenFor(model => model.LT)
+        @Html.HiddenFor(model => model.Concentration)
+        
         <div class="form-group">
             @Html.LabelFor(model => model.Concentration, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -58,6 +62,11 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ScheduledDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ScheduledDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default"  />
             </div>
         </div>
     </div>
