@@ -42,8 +42,8 @@ namespace firestorm.Controllers
 
             if (currentUser.UserID > 0)
             {
-                    FormsAuthentication.SetAuthCookie(role, rememberMe);
-
+                FormsAuthentication.SetAuthCookie(role, rememberMe);
+                return RedirectToAction("Index",role, null);
             }
             else
             {
