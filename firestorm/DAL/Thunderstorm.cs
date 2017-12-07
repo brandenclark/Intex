@@ -15,6 +15,7 @@ namespace firestorm.DAL
         }
 
         public DbSet<Assay> Assays { get; set; }
+        public DbSet<AssayTest> AssayTests { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Company> Companies { get; set; }
@@ -28,6 +29,7 @@ namespace firestorm.DAL
         public DbSet<Priority> Priorities { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<SampleTest> SampleTests { get; set; }
+        public DbSet<NewTestTube> NewTestTube { get; set; }
         public DbSet<SummaryReport> SummaryReports { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<TestMaterial> TestMaterials { get; set; }
