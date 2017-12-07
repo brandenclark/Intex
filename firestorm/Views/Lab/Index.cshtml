@@ -4,7 +4,14 @@
     Layout = "~/Views/Shared/Lab_Layout.cshtml";
 }
 
-<h2>Lab Technician - Home</h2>
+<div class="jumbotron">
+    <h1>ようこそ Lab Page</h1>
+    <p class="lead">You can do anything here!</p>
+</div>
+
+<div class="LandingImgDiv">
+    <img src="~/Content/Images/ManagementPhoto.jpg" class="LandingImg" />
+</div>
 
 <p>
     @Html.ActionLink("Forecast Operations", "OperForecast")
