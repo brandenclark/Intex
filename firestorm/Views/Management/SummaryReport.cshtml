@@ -1,4 +1,4 @@
-﻿@model IEnumerable<String>
+﻿@model IEnumerable<int>
 
 @{
     ViewBag.Title = "View";
@@ -7,7 +7,7 @@
 
 <h2>View</h2>
 
-@foreach(String item in Model)
+@foreach(int item in Model)
 {
-    <p>item</p>
+    <p>@item</p>
 }

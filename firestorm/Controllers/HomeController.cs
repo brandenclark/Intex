@@ -54,6 +54,12 @@ namespace firestorm.Controllers
                 String role = db.Database.SqlQuery<Role>("SELECT * FROM Role WHERE RoleID = " + currentUser.RoleID).First().Name;
                 FormsAuthentication.SetAuthCookie(role, rememberMe);
 
+                //sets the user id cookie
+                HttpCookie myCookie = new HttpCookie("UserID", currentUser.UserID.ToString());
+                Response.Cookies.Add(myCookie);
+                //this is how to read from the cookie
+                    //int UserID = Convert.ToInt32(Request.Cookies["UserID"].Value);
+
                 return RedirectToAction("Index", role, null);
             }
             else
