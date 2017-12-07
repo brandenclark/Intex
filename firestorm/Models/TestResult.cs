@@ -12,12 +12,12 @@ namespace firestorm.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Key, Column(Order = 0)]
-        [ForeignKey("SampleTest", Column(Order = 0))]
+        [ForeignKey("SampleTest")]
         public int TestTubeID { get; set; }
         public virtual SampleTest SampleTest { get; set; }
 
         [Key, Column(Order = 1)]
-        [ForeignKey("TestReport", Column(Order = 1))]
+        [ForeignKey("TestReport")]
         public int ReportTypeCode { get; set; }
         public virtual TestReport TestReport { get; set; }
 
