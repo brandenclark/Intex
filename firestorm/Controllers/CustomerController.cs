@@ -12,9 +12,11 @@ using System.Web.Security;
 
 namespace firestorm.Controllers
 {
-    [Authorize(Users = "Customer")]
+ 
+    //[Authorize(Users = "Customer")]
     public class CustomerController : Controller
     {
+        private Thunderstorm db = new Thunderstorm();
         public ActionResult RequestOrderNumber()
         {
             List<SelectListItem> items = new List<SelectListItem>();
@@ -36,10 +38,18 @@ namespace firestorm.Controllers
             return RedirectToAction("RequestOrder", new { AssayCount = Int32.Parse(form["AssayCount"]) }  );
         }
 
-        public ActionResult RequestOrder(int AssayCount = 0)
+        public ActionResult RequestOrder(int AssayCount = 1)
         {
-            ViewBag.test = AssayCount;
-            return View();
+            WorkOrderCompoundSample workOrderCompoundSample = new WorkOrderCompoundSample();
+            int iCount = 0;
+
+            // Load up the amount of compound samples based on the assay tests
+            for(iCount = 0; iCount < AssayCount; iCount ++)
+            workOrderCompoundSample.compoundSamples.Add(new CompoundSample());
+
+            ViewBag.Assays = db.Assays.ToList();
+
+            return View(workOrderCompoundSample);
         }
         public ActionResult Confirmation()
         {

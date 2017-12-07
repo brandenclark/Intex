@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
 
 namespace firestorm.Models
 {
@@ -18,6 +19,7 @@ namespace firestorm.Models
         public virtual int CompanyID { get; set; }
         public virtual Company Company { get; set; }
 
+        [DisplayName("Additional comments about this order")]
         public string Comments { get; set; }
     }
 }

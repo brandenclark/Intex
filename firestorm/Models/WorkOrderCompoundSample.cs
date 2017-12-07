@@ -11,7 +11,8 @@ namespace firestorm.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public WorkOrder workOrder { get; set; }
-        public List <CompoundSample> compoundSamples { get; set; }
+        public List<Assay> assays = new List<Assay>();
+        public List<CompoundSample> compoundSamples = new List<CompoundSample>();
 
     }
 }

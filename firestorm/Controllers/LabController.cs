@@ -41,7 +41,7 @@ namespace firestorm.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.CompoundSamples.Add(cs);
+               // db.comAdd(cs);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

@@ -5,6 +5,7 @@ using System.Web;
 using firestorm.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
 
 namespace firestorm.Models
 {
@@ -23,11 +24,22 @@ namespace firestorm.Models
         public int QuantityMG { get; set; }
         public DateTime DateArrived { get; set; }
         public String ReceivedBy { get; set; }
+
+        [DisplayName("Desired Completion Date")]
         public DateTime DateDue { get; set; }
         public String Appearance { get; set; }
+
+        [Required]
+        [DisplayName("Weight of Compound")]
         public int Weight { get; set; }
+
         public float MolMass { get; set; }
+
+        [Required]
+        [DisplayName("Do you authroize any additional tests as needed?")]
         public bool AuthAddTest { get; set; }
+
+        [Required]
         public DateTime ScheduledDate { get; set; }
 
         [ForeignKey("Assay")]

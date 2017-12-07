@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
 
 namespace firestorm.Models
 {
@@ -13,6 +14,7 @@ namespace firestorm.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public String AssayID { get; set; }
+        [DisplayName("Assay Name")]
         public String Name { get; set; }
         public String Procedure { get; set; }
     }

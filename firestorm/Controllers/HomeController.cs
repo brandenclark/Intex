@@ -43,6 +43,7 @@ namespace firestorm.Controllers
             if (currentUser.UserID > 0)
             {
                     FormsAuthentication.SetAuthCookie(role, rememberMe);
+                return View();
 
             }
             else
