@@ -7,12 +7,12 @@ using System.Web;
 
 namespace firestorm.Models
 {
-    public class WorkOrderCompoundSample
+    public class CompoundSampleSampleTest
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public WorkOrder workOrder { get; set; }
-        public List<Assay> assays = new List<Assay>();
-        public List<CompoundSampleSampleTest> compoundSampleSampleTests = new List<CompoundSampleSampleTest>();
+        public CompoundSample compoundSample { get; set; }
+        public List<SampleTest> sampleTests = new List<SampleTest>();
+
 
     }
 }
