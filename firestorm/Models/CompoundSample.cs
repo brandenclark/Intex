@@ -36,11 +36,8 @@ namespace firestorm.Models
         public float MolMass { get; set; }
 
         [Required]
-        [DisplayName("Do you authroize any additional tests as needed?")]
+        [DisplayName("Authorize additional tests based upon test outcome.")]
         public bool AuthAddTest { get; set; }
-
-        [Required]
-        public DateTime ScheduledDate { get; set; }
 
         [ForeignKey("Assay")]
         public String AssayID { get; set; }
