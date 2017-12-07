@@ -4,12 +4,6 @@
 }
 
 <h2>Request Order</h2>
-
-
-
-
-
-
     
 @using (Html.BeginForm())
 {
@@ -23,9 +17,13 @@
         @{
             int iCount = 0;
             int iCount1 = 1;
-            foreach (var Item in Model.compoundSamples)
+            for (iCount = 0; iCount < Model.compoundSampleSampleTests.Count(); iCount++)
             {
-                <h4>Assy @iCount1</h4>
+                <h3>Compound @iCount </h3>
+
+                foreach (var Item in Model.compoundSampleSampleTests.ElementAt(iCount).sampleTests)
+                {
+                <h4>Assay @iCount1</h4>
 
                 <div class="form-group">
                     <label class="control-label col-md-2">Assay Test</label>
@@ -34,22 +32,18 @@
                         @Html.ValidationMessageFor(model => Model.assays.ElementAt(iCount).AssayID, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(item => Item.DateDue, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(item => Item.DateDue, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(item => Item.DateDue, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-
-                    iCount++;
-                    iCount1++;
+                        iCount1++;
+                    }
                 }
-
             }
 
+        <br /><br />
+        <div class="form-group">
+           <label class="control-label col-md-2">Desired Completion Date</label>
+            <div class="col-md-10">
+              <input type="date" name="DateDue" />
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.workOrder.Comments, htmlAttributes: new { @class = "control-label col-md-2" })

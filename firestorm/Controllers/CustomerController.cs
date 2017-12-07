@@ -18,10 +18,31 @@ namespace firestorm.Controllers
     {
         private Thunderstorm db = new Thunderstorm();
         static public WorkOrderCompoundSample workOrderCompoundSample;
+        static public User user;
+        static public List<int> iTest;
+
+        public ActionResult Index()
+        {
+            return View();
+        }
 
         public ActionResult RequestOrderNumber()
         {
-          
+            user = db.Users.Find(Int32.Parse(Request.Cookies["UserID"].Value));
+
+            workOrderCompoundSample = new WorkOrderCompoundSample();
+
+            workOrderCompoundSample.workOrder = new WorkOrder();
+            workOrderCompoundSample.compound = new Compound();
+
+
+            workOrderCompoundSample.workOrder.Discount = 0;
+            workOrderCompoundSample.workOrder.CompanyID = user.CompanyID.Value;
+
+            workOrderCompoundSample.workOrder.OrderID = db.WorkOrders.ToList().Max(x => x.OrderID) + 1;
+
+            //Create compound and assign the number
+            workOrderCompoundSample.compound.LT = db.Compounds.ToList().Max(x => x.LT) + 1;
 
             List<SelectListItem> items = new List<SelectListItem>();
 
@@ -39,14 +60,16 @@ namespace firestorm.Controllers
             return View("RequestOrderNumber");
         }
 
+
+
         [HttpPost]
         public ActionResult RequestOrderNumber(FormCollection form)
         {
-            workOrderCompoundSample = new WorkOrderCompoundSample();
+           
             int CompoundsNeeded = Int32.Parse(form["CompoundCount"]);
             int iCount = 0;
             List<SelectListItem> items = new List<SelectListItem>();
-     
+            workOrderCompoundSample.compound.Name = form["compound.Name"];
 
             items.Add(new SelectListItem { Text = "1", Value = "1" });
             items.Add(new SelectListItem { Text = "2", Value = "2" });
@@ -83,7 +106,10 @@ namespace firestorm.Controllers
             for (iCount = 0; iCount < CompoundsNeeded; iCount++)
             {
                 workOrderCompoundSample.compoundSampleSampleTests.Add(new CompoundSampleSampleTest());
-                
+                workOrderCompoundSample.compoundSampleSampleTests.ElementAt(iCount).compoundSample = new CompoundSample();
+                workOrderCompoundSample.compoundSampleSampleTests.ElementAt(iCount).compoundSample.OrderID = workOrderCompoundSample.workOrder.OrderID;
+                workOrderCompoundSample.compoundSampleSampleTests.ElementAt(iCount).compoundSample.LT = workOrderCompoundSample.compound.LT;
+                workOrderCompoundSample.compoundSampleSampleTests.ElementAt(iCount).compoundSample.SequenceCode = db.CompoundSamples.Max(x => x.SequenceCode) + 1;
             }
 
 
@@ -94,28 +120,93 @@ namespace firestorm.Controllers
         [HttpPost]
         public ActionResult RequestOrderTests(FormCollection form)
         {
+            List<string> sTests = form["TestCount"].Split(',').ToList();
+            iTest = new List<int>();
+            int iCount = 0;
+            int iCount1 = 0;
 
+            foreach (var Test in sTests)
+            {
+                iTest.Add(Int32.Parse(Test));
+            }
+            
 
-            return View();
+            foreach (var Compound in workOrderCompoundSample.compoundSampleSampleTests)
+            {
+                for(iCount = 0; iCount < iTest.ElementAt(iCount1); iCount++ )
+                {
+                    Compound.sampleTests.Add(new SampleTest());
+                }
+                iCount1++;
+            }
+            return RedirectToAction("RequestOrder", "Customer");
         }
 
 
 
-        public ActionResult RequestOrder(int? AssayCount)
+
+
+
+
+
+
+        public ActionResult RequestOrder()
         {
-            WorkOrderCompoundSample workOrderCompoundSample = new WorkOrderCompoundSample();
             int iCount = 0;
 
-            // Load up the amount of compound samples based on the assay tests
-            for(iCount = 0; iCount < AssayCount; iCount ++)
-           // workOrderCompoundSample.compoundSamples.Add(new CompoundSample());
+         
 
             ViewBag.Assays = db.Assays.ToList();
 
             return View(workOrderCompoundSample);
         }
-        public ActionResult Confirmation()
+
+        [HttpPost]
+        public ActionResult RequestOrder(FormCollection form)
         {
+            /*Weight
+             *DateDue
+             *AssayID
+             * Comments
+             */
+            List<string> sAssays = form["AssayID"].Split(',').ToList();
+            int iCount = 0;
+            int iCount1 = 0;
+            int iCount2 = 0;
+            
+            foreach(var Compound in workOrderCompoundSample.compoundSampleSampleTests)
+            { 
+                Compound.compoundSample.DateDue = Convert.ToDateTime(form["DateDue"]);
+                Compound.sampleTests.Clear();
+                for (iCount = 0; iCount < iTest.ElementAt(iCount1); iCount++)
+                    {
+                        Compound.compoundSample.AssayID = sAssays.ElementAt(iCount);
+                        var Tests = db.Database.SqlQuery<AssayTest>("SELECT * FROM AssayTest WHERE AssayID = '" + Compound.compoundSample.AssayID +"'").ToList();
+
+                        for (iCount2 = 0; iCount2 < Tests.Count(); iCount2++)
+                        {
+                            Compound.sampleTests.Add(new SampleTest());
+                            Compound.sampleTests.ElementAt(iCount).LT = workOrderCompoundSample.compound.LT;
+                            Compound.sampleTests.ElementAt(iCount).SequenceCode = Compound.compoundSample.SequenceCode;
+                            Compound.sampleTests.ElementAt(iCount).TestTubeID = db.SampleTests.Max(x => x.TestTubeID) + 1;
+                        }
+                      
+                }
+                iCount1++;
+            }
+
+
+            
+            workOrderCompoundSample.workOrder.Comments = form["workOrder.Comments"];
+            
+
+            return RedirectToAction("Confirmation", new {Name = user.FirstName });
+        }
+
+
+        public ActionResult Confirmation(string Name)
+        {
+            ViewBag.Name = Name;
             return View();
         }
         public ActionResult TrackOrder()
