@@ -216,6 +216,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Shared\Sales_Layout.cshtml" />
+    <Content Include="Views\Shared\Management_Layout.cshtml" />
+    <Content Include="Views\Shared\Lab_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
