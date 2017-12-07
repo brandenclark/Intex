@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "ScheduleTest";
-    Layout = "~/Views/Shared/Lab_Layout.cshtml";
 }
 
 <h2>ScheduleTest</h2>
@@ -12,7 +11,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Add the Compound Sample and scheduled date</h4>
+        <h4>CompoundSample</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
