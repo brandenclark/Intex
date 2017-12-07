@@ -12,7 +12,7 @@ using System.Web.Security;
 
 namespace firestorm.Controllers
 {
-    [Authorize(Users = "Lab")]
+    //[Authorize(Users = "Lab")]
     public class LabController : Controller
     {
         // GET: Lab
@@ -37,7 +37,7 @@ namespace firestorm.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LT,SequenceCode,QuantityMG,DateArrived,ReceivedBy,DateDue,Appearance,Weight,MolMass,AuthAddTest,ScheduledDate,AssayID,OrderID")] CompoundSample cs)
+        public ActionResult ScheduleTest([Bind(Include = "LT,SequenceCode,QuantityMG,DateArrived,ReceivedBy,DateDue,Appearance,Weight,MolMass,AuthAddTest,ScheduledDate,AssayID,OrderID")] CompoundSample cs)
         {
             if (ModelState.IsValid)
             {

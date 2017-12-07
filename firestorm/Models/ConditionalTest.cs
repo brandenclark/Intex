@@ -19,5 +19,6 @@ namespace firestorm.Models
 
         [Key, Column(Order =2), ForeignKey("Test")]
         public int CondTestID { get; set; }
+        public virtual Test Test { get; set; }
     }
 }
