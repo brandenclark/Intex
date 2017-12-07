@@ -153,6 +153,7 @@
     <Compile Include="Controllers\LabController.cs" />
     <Compile Include="Controllers\ManagementController.cs" />
     <Compile Include="Controllers\SalesController.cs" />
+    <Compile Include="Controllers\UsersReferenceController.cs" />
     <Compile Include="DAL\Thunderstorm.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -180,6 +181,7 @@
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\WorkOrder.cs" />
+    <Compile Include="Models\WorkOrderCompoundSample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +200,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\JavaScript\firestorm.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -210,7 +213,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -226,10 +231,21 @@
     <Content Include="Views\Shared\Sales_Layout.cshtml" />
     <Content Include="Views\Shared\Management_Layout.cshtml" />
     <Content Include="Views\Shared\Lab_Layout.cshtml" />
-    <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Lab\Index.cshtml" />
     <Content Include="Views\Sales\Index.cshtml" />
     <Content Include="Views\Management\Index.cshtml" />
+    <Content Include="Views\Customer\Confirmation.cshtml" />
+    <Content Include="Views\Customer\TrackOrder.cshtml" />
+    <Content Include="Views\UsersReference\Create.cshtml" />
+    <Content Include="Views\UsersReference\Delete.cshtml" />
+    <Content Include="Views\UsersReference\Details.cshtml" />
+    <Content Include="Views\UsersReference\Edit.cshtml" />
+    <Content Include="Views\UsersReference\Index.cshtml" />
+    <Content Include="Views\Home\CreateAccount.cshtml" />
+    <Content Include="Views\Home\CreateCompany.cshtml" />
+    <Content Include="Views\Shared\Customer_Layout.cshtml" />
+    <Content Include="Views\Customer\RequestOrder.cshtml" />
+    <Content Include="Views\Customer\RequestOrderNumber.cshtml" />
     <Content Include="Views\Management\SummaryReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
