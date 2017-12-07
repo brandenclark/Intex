@@ -13,12 +13,12 @@ namespace firestorm.Models
     public class SampleTest
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TestTubeID { get; set; }
         public float Concentration { get; set; }
 
         [DisplayName("Scheduled Date")]
-        public DateTime ScheduledDate { get; set; }
+        public DateTime? ScheduledDate { get; set; }
 
         [ForeignKey("CompoundSample"), Column(Order = 0)]
         public virtual int? LT { get; set; }

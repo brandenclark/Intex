@@ -29,40 +29,43 @@ namespace firestorm.Controllers
         }
         public ActionResult DisplayTests()
         {
-            var test = db.SampleTests;
-            return View(test.ToList());
+            IEnumerable<NewTestTube> test= db.Database.SqlQuery<NewTestTube>("SELECT [Assay.AssayID], [Assay.Name]," +
+                "[CompoundSample.SequenceCode], [CompoundSample.LT], [CompoundSample.DateDue], [Test.TestID] " +
+                "FROM [Assay], [Test], [CompoundSample], [AssayTest]" +
+                "WHERE [Test.TestID] = [AssayTest.TestID] AND [AssayTest.AssayID] = [Assay.AssayID] " +
+                "AND [Assay.AssayID] = [CompoundSample.AssayID]");
+            return View(test);
         }
-        //GET: SampleTest/Details
-        public ActionResult ScheduleTest(int? id)
+        //Edit
+        public ActionResult CreateTTube(int? id, int? lt, int? sc, string asid)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SampleTest test = db.SampleTests.Find(id);
-            if (test == null)
-            {
-                return HttpNotFound();
-            }
-            return View(test);
-        }
-        //GET SampleTest/Edit
-        public ActionResult TestEdit(int? id)
-        {
-            if (id == null)
+            if (lt == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SampleTest test = db.SampleTests.Find(id);
-            if (test == null)
+            if (sc == null)
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(test);
+            if (asid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Test atest = db.Tests.Find(id);
+            SampleTest newsampletest = new SampleTest();
+            newsampletest.AssayID = asid;
+            newsampletest.LT = lt;
+            newsampletest.SequenceCode = sc;
+            newsampletest.TestID = id ?? default(int);
+            return View(newsampletest);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TestTubeID,Concentration,LT,SequenceCode,AssayID,TestID")] SampleTest test)
+        public ActionResult CreateTTube([Bind(Include = "TestTubeID,ScheduledDate,Concentration,LT,SequenceCode,AssayID,TestID")] SampleTest test)
         {
             if (ModelState.IsValid)
             {
@@ -72,6 +75,7 @@ namespace firestorm.Controllers
             }
             return View(test);
         }
+        
         public ActionResult UpdateTest()
         {
             return View();
