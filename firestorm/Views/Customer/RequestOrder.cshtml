@@ -14,18 +14,16 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <br />
-        @{int iCount = 1;}
+        @{int iCount = 0;}
         @foreach (var Item in Model.compoundSamples)
         {
-           // @foreach (var Assay in Model.assays)
-            {
-            <h4>Assy @iCount</h4>
+            <h4>Assy (@iCount + 1)</h4>
 
             <div class="form-group">
-                @Html.LabelFor(model => , htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => Model.assays.ElementAt(iCount), htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.positionCode, new SelectList(ViewBag.positions, "positionCode", "positionDesc"))
-                    @Html.ValidationMessageFor(model => model.positionCode, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => Model.assays.ElementAt(iCount), new SelectList(Model.assays, "positionCode", "positionDesc"))
+                    @Html.ValidationMessageFor(model => Model.assays.ElementAt(iCount), "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -36,7 +34,7 @@
                     @Html.ValidationMessageFor(item => Item.DateDue, "", new { @class = "text-danger" })
                 </div>
             </div>
-            }
+            
 
             @iCount++
         }
