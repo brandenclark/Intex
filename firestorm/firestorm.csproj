@@ -230,6 +230,7 @@
     <Content Include="Views\Lab\Index.cshtml" />
     <Content Include="Views\Sales\Index.cshtml" />
     <Content Include="Views\Management\Index.cshtml" />
+    <Content Include="Views\Management\SummaryReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
