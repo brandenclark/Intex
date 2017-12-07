@@ -57,6 +57,8 @@ namespace firestorm.Controllers
         }
         public ActionResult TrackOrder()
         {
+            User user = db.Users.Find(Convert.ToInt32(Request.Cookies["UserID"].Value));
+            
             return View();
         }
     }
