@@ -19,6 +19,11 @@ namespace firestorm.Controllers
         private Thunderstorm db = new Thunderstorm();
         static public WorkOrderCompoundSample workOrderCompoundSample;
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult RequestOrderNumber()
         {
           
