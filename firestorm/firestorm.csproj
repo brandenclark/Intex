@@ -188,6 +188,7 @@
     <Content Include="Content\CSS\firestorm.css" />
     <Content Include="Content\Images\LabTest%28old%29.jpg" />
     <Content Include="Content\Images\LabTest.jpg" />
+    <Content Include="Content\Images\ManagementPhoto.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

@@ -12,6 +12,7 @@ using System.Web.Security;
 
 namespace firestorm.Controllers
 {
+    [Authorize(Users = "Lab")]
     public class LabController : Controller
     {
         // GET: Lab
