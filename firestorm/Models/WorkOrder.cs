@@ -13,7 +13,7 @@ namespace firestorm.Models
     {
         [Key]
         public int OrderID { get; set; }
-        public decimal Discount { get; set; }
+        public double? Discount { get; set; }
 
         [ForeignKey("Company")]
         public virtual int CompanyID { get; set; }

@@ -247,7 +247,6 @@
     <Content Include="Views\Customer\RequestOrder.cshtml" />
     <Content Include="Views\Customer\RequestOrderNumber.cshtml" />
     <Content Include="Views\Management\SummaryReport.cshtml" />
-    <Content Include="Views\Lab\ScheduleTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
