@@ -76,5 +76,47 @@ namespace firestorm.Controllers
         {
             return View();
         }
+
+        public ActionResult ManageTickets()
+        {
+            var tickets = db.Tickets.Include(t => t.Priority).Include(t => t.User).Include(t => t.WorkOrder);
+            return View(tickets.ToList());
+        }
+
+        public ActionResult ResolveTicket(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Ticket ticket = db.Tickets.Find(id);
+            if (ticket == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.PriorityName = new SelectList(db.Priorities, "PriorityName", "PriorityName", ticket.PriorityName);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "FirstName", ticket.UserID);
+            ViewBag.OrderID = new SelectList(db.WorkOrders, "OrderID", "Comments", ticket.OrderID);
+            return View(ticket);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResolveTicket([Bind(Include = "TicketID, DateSubmitted, DateResolved, PriorityName, OrderID, UserID, Comment, Response")] Ticket ticket)
+        {
+            if (ModelState.IsValid)
+            {
+                ticket.DateResolved = DateTime.Now;
+
+                db.Entry(ticket).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.PriorityName = new SelectList(db.Priorities, "PriorityName", "PriorityName", ticket.PriorityName);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "FirstName", ticket.UserID);
+            ViewBag.OrderID = new SelectList(db.WorkOrders, "OrderID", "Comments", ticket.OrderID);
+            return View(ticket);
+        }
     }
 }

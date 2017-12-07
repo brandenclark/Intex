@@ -252,6 +252,9 @@
     <Content Include="Views\Management\CreateTicket.cshtml" />
     <Content Include="Views\Management\ManageTickets.cshtml" />
     <Content Include="Views\Management\ResolveTicket.cshtml" />
+    <Content Include="Views\Sales\CreateTicket.cshtml" />
+    <Content Include="Views\Lab\ResolveTicket.cshtml" />
+    <Content Include="Views\Lab\ManageTickets.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
