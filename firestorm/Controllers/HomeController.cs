@@ -36,13 +36,13 @@ namespace firestorm.Controllers
                             "Select * " +
                             "FROM [User] " +
                             "WHERE Email = '" + email + "' AND " +
-                            "[Password] = '" + password + "'");
+                            "[Password] = '" + password + "'").First();
 
-            if (currentUser.Count() > 0)
+            String role = db.Database.SqlQuery<Role>("SELECT * FROM Role WHERE RoleID = " + currentUser.RoleID).First().Name;
+
+            if (currentUser.UserID > 0)
             {
-                FormsAuthentication.SetAuthCookie(email, rememberMe);
-
-                return RedirectToAction("Index", "Home");
+                    FormsAuthentication.SetAuthCookie(role, rememberMe);
 
             }
             else
