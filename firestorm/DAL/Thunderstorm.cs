@@ -20,6 +20,7 @@ namespace firestorm.DAL
         public DbSet<Company> Companies { get; set; }
         public DbSet<Compound> Compounds { get; set; }
         public DbSet<ConditionalTest> ConditionalTests { get; set; }
+        public DbSet<CompoundSample> CompoundSamples { get; set; }
         public DbSet<DataReport> DataReports { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Material> Materials { get; set; }

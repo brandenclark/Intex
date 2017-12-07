@@ -31,19 +31,30 @@ namespace firestorm.Controllers
         {
             String email = form["Email address"].ToString();
             String password = form["Password"].ToString();
+            User currentUser = null;
 
-            var currentUser = db.Database.SqlQuery<User>(
+            try
+            {
+                currentUser = db.Database.SqlQuery<User>(
                             "Select * " +
                             "FROM [User] " +
                             "WHERE Email = '" + email + "' AND " +
                             "[Password] = '" + password + "'").First();
-
-            String role = db.Database.SqlQuery<Role>("SELECT * FROM Role WHERE RoleID = " + currentUser.RoleID).First().Name;
-
-            if (currentUser.UserID > 0)
+            }
+            catch(Exception e)
             {
-                    FormsAuthentication.SetAuthCookie(role, rememberMe);
+                return View();
+            }
+            
+           
+            
 
+            if (currentUser != null)
+            {
+                String role = db.Database.SqlQuery<Role>("SELECT * FROM Role WHERE RoleID = " + currentUser.RoleID).First().Name;
+                FormsAuthentication.SetAuthCookie(role, rememberMe);
+
+                return RedirectToAction("Index", role, null);
             }
             else
             {
@@ -56,6 +67,7 @@ namespace firestorm.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateAccount([Bind(Include = "UserID,FirstName,LastName,Phone,Email,Password,RoleID,CompanyID")] User user, FormCollection form)
