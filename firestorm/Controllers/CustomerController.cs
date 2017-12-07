@@ -131,10 +131,7 @@ namespace firestorm.Controllers
 
             ViewBag.CompanyName = user.Company.Name;
 
-            var orders = db.Database.SqlQuery<WorkOrder>
-                ("SELECT * " +
-                "FROM WorkOrder" +
-                "WHERE CompanyID = " + user.CompanyID).ToList();
+            var orders = db.Database.SqlQuery<WorkOrder>("SELECT * FROM WorkOrder WHERE CompanyID = " + user.CompanyID).ToList();
 
             return View(orders);
         }
