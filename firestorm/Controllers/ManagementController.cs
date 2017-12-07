@@ -25,9 +25,22 @@ namespace firestorm.Controllers
 
         public ActionResult SummaryReport()
         {
-            var SumRpts = db.Database.SqlQuery<int>("SELECT wo.OrderID FROM SummaryReport sr RIGHT JOIN WorkOrder wo ON sr.OrderID = wo.OrderID INNER JOIN CompoundSample cs ON cs.OrderID = wo.OrderID  INNER JOIN SampleTest st ON st.LT = cs.LT AND st.SequenceCode = cs.SequenceCode WHERE st.CompletedTest = 1 AND wo.OrderID NOT IN(SELECT wo.OrderID FROM WorkOrder wo INNER JOIN CompoundSample cs ON cs.OrderID = wo.OrderID INNER JOIN SampleTest st ON st.LT = cs.LT AND st.SequenceCode = cs.SequenceCode WHERE st.CompletedTest = 0) AND sr.OrderID IS NULL GROUP BY wo.OrderID").ToList();
+            List <CompanyWorkOrders> collect = new List<CompanyWorkOrders>();
+            CompanyWorkOrders wo = new CompanyWorkOrders();
 
-            return View(SumRpts);
+            var SumRpts = db.Database.SqlQuery<int>("SELECT wo.OrderID FROM SummaryReport sr RIGHT JOIN WorkOrder wo ON sr.OrderID = wo.OrderID INNER JOIN Company c ON c.CompanyID = wo.CompanyID INNER JOIN CompoundSample cs ON cs.OrderID = wo.OrderID  INNER JOIN SampleTest st ON st.LT = cs.LT AND st.SequenceCode = cs.SequenceCode WHERE st.CompletedTest = 1 AND wo.OrderID NOT IN(SELECT wo.OrderID FROM WorkOrder wo INNER JOIN CompoundSample cs ON cs.OrderID = wo.OrderID INNER JOIN SampleTest st ON st.LT = cs.LT AND st.SequenceCode = cs.SequenceCode WHERE st.CompletedTest = 0) AND sr.OrderID IS NULL GROUP BY wo.OrderID").ToList();
+            
+            foreach(int item in SumRpts)
+            {
+                wo.WorkOrder = db.WorkOrders.Find(item);
+
+                wo.Company = db.Companies.Find(wo.WorkOrder.CompanyID);
+
+                collect.Add(wo);
+            }
+            
+            
+            return View(collect);
         }
 
         public ActionResult CreateTicket()
