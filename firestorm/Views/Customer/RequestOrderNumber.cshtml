@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "RequestOrderNumber";
+    Layout = "~/Views/Shared/Customer_Layout.cshtml";
+}
+
+<h2>Request Order</h2>
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            <label class="col-md-2">How many assays are to be run?</label>
+            <div class="col-md-9">
+                @Html.DropDownList("AssayCount")
+
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-10">
+                <input type="submit" value="Next" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
