@@ -55,13 +55,22 @@
 
             @{ 
                 int iCount = 1;
+                int iCount2 = 0;
                 foreach (var Item in Model.compoundSampleSampleTests)
                 {
-
+              
 
             <div class="form-group">
 
+                @if (iCount == 1)
+                {
+                <label class="col-md-2">@Model.compound.Name</label>
+                }
+                else
+                {
                 <label class="col-md-2">Compound @iCount</label>
+                }
+               
                 <div class="col-md-9">
                     @Html.DropDownList("TestCount")
                 </div>
@@ -74,6 +83,7 @@
                    <input name="Weight" />
                 </div>
             </div>
+            <br />
                     iCount++;
                 }
 
