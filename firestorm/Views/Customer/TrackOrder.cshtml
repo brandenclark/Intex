@@ -6,11 +6,11 @@
 }
 
 <h2>@ViewBag.CompanyName</h2>
-
+<!--
 <p>
-    @Html.ActionLink("Create New", "Create")
+    //Html.ActionLink("Create New", "Create")
 </p>
-
+    -->
 <table class="table">
     <tr>
         <th class="col-xs-3">
@@ -32,7 +32,7 @@
             @Html.DisplayFor(modelItem => item.Comments)
         </td>
         <td>
-            @Html.ActionLink("Order Progress", "Delete", new { id=item.OrderID })
+            @Html.ActionLink("Order Progress", "ViewOrder", new { OrderID=item.OrderID })
         </td>
     </tr>
 }

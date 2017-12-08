@@ -14,11 +14,15 @@ namespace firestorm.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DisplayName("Test ID")]
         public int TestTubeID { get; set; }
         public double Concentration { get; set; }
 
         [DisplayName("Scheduled Date")]
         public DateTime? ScheduledDate { get; set; }
+
+        [DisplayName("Test Complete?")]
+        public int? CompletedTest { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [ForeignKey("CompoundSample"), Column(Order = 0)]
@@ -26,11 +30,13 @@ namespace firestorm.Models
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [ForeignKey("CompoundSample"), Column(Order = 1)]
+        [DisplayName("Sequence Code?")]
         public virtual int? SequenceCode { get; set; }
         public virtual CompoundSample CompoundSample { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [ForeignKey("AssayTest"), Column(Order = 2)]
+        [DisplayName("Type of Assay")]
         public virtual string AssayID { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

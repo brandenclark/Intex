@@ -59,12 +59,12 @@
             <label class="control-label col-md-2">Company Name</label>
             <div class="col-md-10">
                <input class="form-control" name="CompanyName"/>
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
             </div>
         </div>
 
-
-
+        <input class="form-control text-box single-line" data-val="true" data-val-required="Please enter your first name" id="RoleID" name="RoleID" type="hidden" value="1">
+        <input class="form-control text-box single-line" data-val="true" data-val-required="Please enter your first name" id="CompanyID" name="CompanyID" type="hidden" value="3">
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

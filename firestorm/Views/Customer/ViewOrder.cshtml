@@ -1,0 +1,59 @@
+﻿@model firestorm.Models.WorkOrderCompoundSample
+
+@{
+    ViewBag.Title = "ViewOrder";
+    Layout = "~/Views/Shared/Customer_Layout.cshtml";
+    int iCount = 1;
+}
+
+<h2>Order Progress - Order #@Model.workOrder.OrderID</h2>
+<h3>for @ViewBag.Name, representing @ViewBag.CompanyName <br />
+    Total amount of compounds to be tested: @Model.compoundSampleSampleTests.Count()
+    Total overall count of tests: @ViewBag.TestTotal
+</h3>
+<br /><br />
+
+@foreach (var Compound in Model.compoundSampleSampleTests)
+{
+    <h2>Compound #@iCount</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.compoundSampleSampleTests.ElementAt(0).sampleTests.ElementAt(0).TestTubeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.compoundSampleSampleTests.ElementAt(0).sampleTests.ElementAt(0).SequenceCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.compoundSampleSampleTests.ElementAt(0).sampleTests.ElementAt(0).AssayID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.compoundSampleSampleTests.ElementAt(0).sampleTests.ElementAt(0).CompletedTest)
+        </th>
+    </tr>
+
+
+
+@foreach (var SampleTest in Compound.sampleTests)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => SampleTest.TestTubeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => SampleTest.SequenceCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => SampleTest.AssayID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => SampleTest.CompletedTest)
+        </td>
+
+    </tr>
+}
+
+</table>
+        @{iCount++;}
+    <br /><br />
+}

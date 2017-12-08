@@ -28,6 +28,7 @@ body
 h2 
 {
     color:rgb(5, 61, 111);
+    font-family: 'MS Gothic';
 }
 
 .dropnav
@@ -69,9 +70,17 @@ h2
 
 
 
-.AssayDropDown
+#AssayID, input[type=date], input[id = workOrder_Comments] 
 {
     position: relative;
-    top:100px;
+    top: 8px;
 }
 
+#AssayList
+{
+    position:absolute;
+    top: 410px;
+    left: 800px;
+    border: 1px solid blue;
+    padding: 0 5px 2px 5px;
+}

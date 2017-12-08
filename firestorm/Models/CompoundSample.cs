@@ -34,7 +34,7 @@ namespace firestorm.Models
         [DisplayName("Weight of Compound")]
         public int Weight { get; set; }
 
-        public float MolMass { get; set; }
+        public decimal? MolMass { get; set; }
 
         [Required]
         [DisplayName("Authorize additional tests based upon test outcome.")]

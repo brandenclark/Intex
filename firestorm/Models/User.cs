@@ -5,6 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel;
+using System.Web.Mvc;
 
 namespace firestorm.Models
 {
@@ -35,11 +36,13 @@ namespace firestorm.Models
         [Required(ErrorMessage = "Please enter a password")]
         [DataType(DataType.Password)]
         public String Password { get; set; }
-        
+
+        [HiddenInput(DisplayValue = false)]
         [ForeignKey("Role")]
         public virtual int? RoleID { get; set; }
         public virtual Role Role { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
         [Required(ErrorMessage = "Please enter your company")]
         [ForeignKey("Company")]
         public virtual int? CompanyID { get; set; }
