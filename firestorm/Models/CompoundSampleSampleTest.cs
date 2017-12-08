@@ -11,7 +11,8 @@ namespace firestorm.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public CompoundSample compoundSample { get; set; }
-        public List<SampleTest> sampleTests = new List<SampleTest>();
+        public List<SampleTest> sampleTests { get; set; }
+            //= new List<SampleTest>();
 
 
     }

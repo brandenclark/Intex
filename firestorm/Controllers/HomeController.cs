@@ -12,6 +12,7 @@ using System.Web.Security;
 
 namespace firestorm.Controllers
 {
+    
     public class HomeController : Controller
     {
         private Thunderstorm db = new Thunderstorm();
@@ -104,21 +105,22 @@ namespace firestorm.Controllers
                 {
                     db.Users.Add(user);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Customer");
                 }
 
                 else
                 {
                     PendedUser = user;
-                    return RedirectToAction("CreateCompany");
+                    return RedirectToAction("CreateCompany", new { CompanyName = form["CompanyName"].ToString() });
                 }
             }
 
             return View(user);
         }
 
-        public ActionResult CreateCompany()
+        public ActionResult CreateCompany(string CompanyName)
         {
+            ViewBag.CompanyName = CompanyName;
             return View();
         }
         [HttpPost]
@@ -144,7 +146,7 @@ namespace firestorm.Controllers
                 return RedirectToAction("Index");
 
             }
-
+            ViewBag.CompanyName = company.Name;
             return View(company);
         }
 

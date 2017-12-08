@@ -13,13 +13,14 @@ using System.Web.Security;
 namespace firestorm.Controllers
 {
  
-    //[Authorize(Users = "Customer")]
+    [Authorize(Users = "Customer")]
     public class CustomerController : Controller
     {
         private Thunderstorm db = new Thunderstorm();
         static public WorkOrderCompoundSample workOrderCompoundSample;
         static public User user;
         static public List<int> iTest;
+        static public int iTestTubeCounter;
 
         public ActionResult Index()
         {
@@ -29,6 +30,7 @@ namespace firestorm.Controllers
         public ActionResult RequestOrderNumber()
         {
             user = db.Users.Find(Int32.Parse(Request.Cookies["UserID"].Value));
+            iTestTubeCounter = db.SampleTests.Max(x => x.TestTubeID);
 
             workOrderCompoundSample = new WorkOrderCompoundSample();
 
@@ -55,6 +57,7 @@ namespace firestorm.Controllers
             items.Add(new SelectListItem { Text = "7", Value = "7" });
             items.Add(new SelectListItem { Text = "8", Value = "8" });
             items.Add(new SelectListItem { Text = "9", Value = "9" });
+
 
             ViewBag.CompoundCount = items;
             return View("RequestOrderNumber");
@@ -102,15 +105,34 @@ namespace firestorm.Controllers
 
             ViewBag.CompoundCount = items;
             ViewBag.TestCount = items2;
+            ViewBag.DisplayAssayList = db.Assays.ToList();
 
+            workOrderCompoundSample.compoundSampleSampleTests = new List<CompoundSampleSampleTest>();
+
+            int iSequenceCounter = 0;
+            int iSequenceQueryCounter = 0;
             for (iCount = 0; iCount < CompoundsNeeded; iCount++)
             {
+                
                 workOrderCompoundSample.compoundSampleSampleTests.Add(new CompoundSampleSampleTest());
                 workOrderCompoundSample.compoundSampleSampleTests.ElementAt(iCount).compoundSample = new CompoundSample();
                 workOrderCompoundSample.compoundSampleSampleTests.ElementAt(iCount).compoundSample.OrderID = workOrderCompoundSample.workOrder.OrderID;
                 workOrderCompoundSample.compoundSampleSampleTests.ElementAt(iCount).compoundSample.LT = workOrderCompoundSample.compound.LT;
-                workOrderCompoundSample.compoundSampleSampleTests.ElementAt(iCount).compoundSample.SequenceCode = db.CompoundSamples.Max(x => x.SequenceCode) + 1;
-            }
+
+                 var SequenceNumbers = db.Database.SqlQuery<CompoundSample>("SELECT * FROM CompoundSample WHERE LT = '" + workOrderCompoundSample.compoundSampleSampleTests.ElementAt(iCount).compoundSample.LT + "'").ToList();
+
+                if (SequenceNumbers.Count > 0)
+                {
+                    iSequenceQueryCounter++;
+                    workOrderCompoundSample.compoundSampleSampleTests.ElementAt(iCount).compoundSample.SequenceCode = SequenceNumbers.Max(x => x.SequenceCode) + iSequenceQueryCounter;
+                }
+                else
+                {
+                    iSequenceCounter++;
+                    workOrderCompoundSample.compoundSampleSampleTests.ElementAt(iCount).compoundSample.SequenceCode = iSequenceCounter;
+                }
+                }
+
 
 
             return View(workOrderCompoundSample);
@@ -130,9 +152,10 @@ namespace firestorm.Controllers
                 iTest.Add(Int32.Parse(Test));
             }
             
-
+            // Loop to add SampleTests to get the amount of Assays
             foreach (var Compound in workOrderCompoundSample.compoundSampleSampleTests)
             {
+                Compound.sampleTests = new List<SampleTest>();
                 for(iCount = 0; iCount < iTest.ElementAt(iCount1); iCount++ )
                 {
                     Compound.sampleTests.Add(new SampleTest());
@@ -144,7 +167,7 @@ namespace firestorm.Controllers
 
 
 
-
+/**********************REQUEST ORDER ************************/
 
 
 
@@ -155,12 +178,13 @@ namespace firestorm.Controllers
             int iCount = 0;
 
          
-
+            // Put Assays to list for the view
             ViewBag.Assays = db.Assays.ToList();
 
             return View(workOrderCompoundSample);
         }
 
+        
         [HttpPost]
         public ActionResult RequestOrder(FormCollection form)
         {
@@ -173,32 +197,81 @@ namespace firestorm.Controllers
             int iCount = 0;
             int iCount1 = 0;
             int iCount2 = 0;
+            int iCount3 = 0;
             
             foreach(var Compound in workOrderCompoundSample.compoundSampleSampleTests)
             { 
                 Compound.compoundSample.DateDue = Convert.ToDateTime(form["DateDue"]);
+
+                // Clear the Sample tests for each compound to determine the amount of samples tests within each assay
                 Compound.sampleTests.Clear();
+                iCount3 = 0;
+                // Loop for all the assays
                 for (iCount = 0; iCount < iTest.ElementAt(iCount1); iCount++)
                     {
                         Compound.compoundSample.AssayID = sAssays.ElementAt(iCount);
                         var Tests = db.Database.SqlQuery<AssayTest>("SELECT * FROM AssayTest WHERE AssayID = '" + Compound.compoundSample.AssayID +"'").ToList();
+                     
+                    // Loop for all the sample tests within each assay
+                    for (iCount2 = 0; iCount2 < Tests.Count(); iCount2++)
+                    {
+                        Compound.sampleTests.Add(new SampleTest());
+                        Compound.sampleTests.ElementAt(iCount3).LT = workOrderCompoundSample.compound.LT;
+                        Compound.sampleTests.ElementAt(iCount3).SequenceCode = Compound.compoundSample.SequenceCode;
 
-                        for (iCount2 = 0; iCount2 < Tests.Count(); iCount2++)
-                        {
-                            Compound.sampleTests.Add(new SampleTest());
-                            Compound.sampleTests.ElementAt(iCount).LT = workOrderCompoundSample.compound.LT;
-                            Compound.sampleTests.ElementAt(iCount).SequenceCode = Compound.compoundSample.SequenceCode;
-                            Compound.sampleTests.ElementAt(iCount).TestTubeID = db.SampleTests.Max(x => x.TestTubeID) + 1;
+                        iTestTubeCounter++;
+                        Compound.sampleTests.ElementAt(iCount3).TestTubeID = iTestTubeCounter;
+                        Compound.sampleTests.ElementAt(iCount3).TestID = Tests.ElementAt(iCount2).TestID;
+                        Compound.sampleTests.ElementAt(iCount3).AssayID = Compound.compoundSample.AssayID;
+
+                        iCount3++;
                         }
                       
                 }
                 iCount1++;
             }
 
-
-            
             workOrderCompoundSample.workOrder.Comments = form["workOrder.Comments"];
+
+            // Update database tables
             
+            // Update Work Order
+            db.WorkOrders.Add(workOrderCompoundSample.workOrder);
+            db.SaveChanges();
+
+
+            // Check if Compound is already in table
+            var Compounds = db.Compounds.ToList();
+
+            Boolean CompoundUpdate = true;
+            foreach (var Item in Compounds)
+            {
+                if (Item.Name == workOrderCompoundSample.compound.Name)
+                {
+                    CompoundUpdate = false;
+                }
+            }
+            // Updated Compound
+            if (CompoundUpdate)
+            {
+                db.Compounds.Add(workOrderCompoundSample.compound);
+                db.SaveChanges();
+            }
+           
+            // Loop to Update Compound Samples
+            foreach (var Item in workOrderCompoundSample.compoundSampleSampleTests)
+                {
+                    db.CompoundSamples.Add(Item.compoundSample);
+                    db.SaveChanges();
+
+                    // Loop to updated Sample Tests
+                    foreach (var SampleTest in Item.sampleTests)
+                    {
+                        db.SampleTests.Add(SampleTest);
+                        db.SaveChanges();
+                    }
+                }
+
 
             return RedirectToAction("Confirmation", new {Name = user.FirstName });
         }
@@ -221,7 +294,48 @@ namespace firestorm.Controllers
 
             return View(orders);
         }
+        public ActionResult ViewOrder(int? OrderID)
+        {
+            WorkOrderCompoundSample workOrderCompoundSample = new WorkOrderCompoundSample();
 
+            // Find work order
+            workOrderCompoundSample.workOrder = db.WorkOrders.Find(OrderID);
+            workOrderCompoundSample.compoundSampleSampleTests = new List<CompoundSampleSampleTest>();
+
+            // Find the compund samples with that work order
+            List<CompoundSample> dbCompoundSamples = db.Database.SqlQuery<CompoundSample>("SELECT * FROM CompoundSample WHERE OrderID = " + OrderID).ToList();
+
+
+
+            int iCount = 0;
+            int iCount1 = 0;
+            int iTestCount = 0;
+            foreach (var CompoundSample in dbCompoundSamples)
+            {
+                workOrderCompoundSample.compoundSampleSampleTests.Add(new CompoundSampleSampleTest());
+                workOrderCompoundSample.compoundSampleSampleTests.ElementAt(iCount).compoundSample = CompoundSample;
+
+                // Find all the sample tests within the compounds of the work order
+                List<SampleTest> dbSampleTests = db.Database.SqlQuery<SampleTest>("SELECT * FROM SampleTest WHERE LT = '" + 
+                                                                                    dbCompoundSamples.ElementAt(iCount).LT + "' AND SequenceCode =" +
+                                                                                    dbCompoundSamples.ElementAt(iCount).SequenceCode).ToList();
+                workOrderCompoundSample.compoundSampleSampleTests.ElementAt(iCount).sampleTests = new List<SampleTest>();
+
+                for (iCount1 = 0; iCount1 < dbSampleTests.Count(); iCount1++)
+                {
+                    workOrderCompoundSample.compoundSampleSampleTests.ElementAt(iCount).sampleTests.Add(dbSampleTests.ElementAt(iCount1));
+                    iTestCount++;
+                }
+
+                iCount++;
+            }
+
+            ViewBag.Name = db.Users.Find(Convert.ToInt32(Request.Cookies["UserID"].Value)).FirstName;
+            ViewBag.CompanyName = db.Companies.Find(workOrderCompoundSample.workOrder.CompanyID).Name;
+            ViewBag.TotalTest = iTestCount;
+
+            return View(workOrderCompoundSample);
+        }
 
 
     }

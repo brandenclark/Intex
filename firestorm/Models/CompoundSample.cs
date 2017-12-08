@@ -12,8 +12,9 @@ namespace firestorm.Models
     [Table("CompoundSample")]
     public class CompoundSample
     {
-        [Key, Column(Order = 0), ForeignKey("Compound")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, Column(Order = 0), ForeignKey("Compound")]
+
         public int LT { get; set; }
         public virtual Compound Compound { get; set; }
 
@@ -33,7 +34,7 @@ namespace firestorm.Models
         [DisplayName("Weight of Compound")]
         public int Weight { get; set; }
 
-        public float MolMass { get; set; }
+        public decimal? MolMass { get; set; }
 
         [Required]
         [DisplayName("Authorize additional tests based upon test outcome.")]

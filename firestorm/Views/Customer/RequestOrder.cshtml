@@ -17,27 +17,34 @@
         @{
             int iCount = 0;
             int iCount1 = 1;
+            int iCount2 = 1;
+
             for (iCount = 0; iCount < Model.compoundSampleSampleTests.Count(); iCount++)
             {
-                <h3>Compound @iCount </h3>
+
+                <h3>Compound @iCount2 </h3>
 
                 foreach (var Item in Model.compoundSampleSampleTests.ElementAt(iCount).sampleTests)
                 {
-                <h4>Assay @iCount1</h4>
+                <h4>&nbsp;&nbsp;Assay @iCount1</h4>
 
                 <div class="form-group">
-                    <label class="control-label col-md-2">Assay Test</label>
+                    <label for="AssayID" class="control-label col-md-2">Assay Test</label>
                     <div class="col-md-10">
-                        @Html.DropDownListFor(model => Model.assays.ElementAt(iCount).AssayID, new SelectList(ViewBag.Assays, "AssayID", "Name"))
+                        @Html.DropDownListFor(model => Model.assays.ElementAt(iCount).AssayID, new SelectList(ViewBag.Assays, "AssayID", "Name", new {@class = "AssayDropDown" }))
                         @Html.ValidationMessageFor(model => Model.assays.ElementAt(iCount).AssayID, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                        iCount1++;
-                    }
+                    iCount1++;
+
                 }
+                iCount2++;
+                <br /><br />
             }
 
-        <br /><br />
+            }
+
+        <br /><br /><br /><br />
         <div class="form-group">
            <label class="control-label col-md-2">Desired Completion Date</label>
             <div class="col-md-10">
