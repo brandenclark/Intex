@@ -71,3 +71,9 @@ h2
     position: relative;
     top:100px;
 }
+
+body
+{
+    color: aqua !important;
+    background-color: pink !important;
+}
