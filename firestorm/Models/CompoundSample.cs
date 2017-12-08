@@ -12,8 +12,9 @@ namespace firestorm.Models
     [Table("CompoundSample")]
     public class CompoundSample
     {
-        [Key, Column(Order = 0), ForeignKey("Compound")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, Column(Order = 0), ForeignKey("Compound")]
+
         public int LT { get; set; }
         public virtual Compound Compound { get; set; }
 

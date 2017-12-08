@@ -12,6 +12,7 @@ namespace firestorm.Models
     public class WorkOrder
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int OrderID { get; set; }
         public double? Discount { get; set; }
 

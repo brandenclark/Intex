@@ -110,15 +110,16 @@ namespace firestorm.Controllers
                 else
                 {
                     PendedUser = user;
-                    return RedirectToAction("CreateCompany");
+                    return RedirectToAction("CreateCompany", new { CompanyName = form["CompanyName"].ToString() });
                 }
             }
 
             return View(user);
         }
 
-        public ActionResult CreateCompany()
+        public ActionResult CreateCompany(string CompanyName)
         {
+            ViewBag.CompanyName = CompanyName;
             return View();
         }
         [HttpPost]

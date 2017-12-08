@@ -19,7 +19,9 @@ namespace firestorm.Models
         [DisplayName("Last Name")]
         public String LastName { get; set; }
         public String Phone { get; set; }
+        [EmailAddress]
         public String Email { get; set; }
+        [PasswordPropertyText]
         public String Password { get; set; }
         
         [ForeignKey("Role")]
