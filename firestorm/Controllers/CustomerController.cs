@@ -335,7 +335,7 @@ namespace firestorm.Controllers
             ViewBag.CompanyName = db.Companies.Find(workOrderCompoundSample.workOrder.CompanyID).Name;
             ViewBag.TotalTest = iTestCount;
 
-            return View();
+            return View(workOrderCompoundSample);
         }
 
 

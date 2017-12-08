@@ -22,7 +22,7 @@ namespace firestorm.Models
         public DateTime? ScheduledDate { get; set; }
 
         [DisplayName("Test Complete?")]
-        public int? CompletedTest { get; set; }
+        public string CompletedTest { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [ForeignKey("CompoundSample"), Column(Order = 0)]

@@ -7,9 +7,9 @@
 }
 
 <h2>Order Progress - Order #@Model.workOrder.OrderID</h2>
-<h3>for @ViewBag.Name, representing @ViewBag.CompanyName <br />
-    Total amount of compounds to be tested: @Model.compoundSampleSampleTests.Count()
-    Total overall count of tests: @ViewBag.TestTotal
+<h3>Order for @ViewBag.Name, representing @ViewBag.CompanyName <br /> <br />
+    Total amount of compounds to be tested: @Model.compoundSampleSampleTests.Count() <br />
+    Total overall amount of tests: @ViewBag.TotalTest
 </h3>
 <br /><br />
 
@@ -47,13 +47,20 @@
             @Html.DisplayFor(modelItem => SampleTest.AssayID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => SampleTest.CompletedTest)
+            @if(SampleTest.CompletedTest == "n" || SampleTest.CompletedTest == null || SampleTest.CompletedTest == "0")
+            {
+                <p>No</p>
+            }
+            else
+            {
+                <p>Yes</p>
+            }
         </td>
 
     </tr>
 }
 
 </table>
-        @{iCount++;}
+        iCount++;
     <br /><br />
 }
