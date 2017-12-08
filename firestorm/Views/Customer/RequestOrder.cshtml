@@ -22,7 +22,14 @@
             for (iCount = 0; iCount < Model.compoundSampleSampleTests.Count(); iCount++)
             {
 
-                <h3>Compound @iCount2 </h3>
+                if (iCount2 == 1)
+                {
+                    <h3>@Model.compound.Name</h3>
+                }
+                else
+                {
+                    <h3>Compound @iCount2 </h3>
+                }
 
                 foreach (var Item in Model.compoundSampleSampleTests.ElementAt(iCount).sampleTests)
                 {

@@ -31,14 +31,14 @@ namespace firestorm.Models
         public String Appearance { get; set; }
 
         [Required(ErrorMessage = "Please enter a weight of compound")]
-        [DisplayName("Weight of Compound")]
+        [DisplayName("Weight of Compound (mg)")]
         public int Weight { get; set; }
 
-        public float MolMass { get; set; }
+        public decimal? MolMass { get; set; }
 
-        [Required]
+
         [DisplayName("Authorize additional tests based upon test outcome.")]
-        public bool AuthAddTest { get; set; }
+        public string AuthAddTest { get; set; }
 
         [ForeignKey("Assay")]
         public String AssayID { get; set; }

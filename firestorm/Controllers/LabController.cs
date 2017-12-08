@@ -25,6 +25,7 @@ namespace firestorm.Controllers
         }
         public ActionResult OperForecast()
         {
+
             return View();
         }
         public ActionResult DisplayTests()
@@ -123,5 +124,7 @@ namespace firestorm.Controllers
             ViewBag.OrderID = new SelectList(db.WorkOrders, "OrderID", "Comments", ticket.OrderID);
             return View(ticket);
         }
+
+      
     }
 }
