@@ -27,7 +27,6 @@ namespace firestorm.Controllers
             return View();
         }
 
-
         public ActionResult RequestOrderNumber()
         {
             user = db.Users.Find(Int32.Parse(Request.Cookies["UserID"].Value));
