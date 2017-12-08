@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/Lab_Layout.cshtml";
 }
 
 <h2>Schedule Test</h2>
@@ -60,7 +60,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ScheduledDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ScheduledDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ScheduledDate, new { htmlAttributes = new { @class = "form-control", @type = "date", @value= DateTime.Now} })
                 @Html.ValidationMessageFor(model => model.ScheduledDate, "", new { @class = "text-danger" })
             </div>
         </div>

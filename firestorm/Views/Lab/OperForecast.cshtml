@@ -1,7 +1,94 @@
-﻿
+﻿@model IEnumerable<firestorm.Models.CompoundSample>
+
 @{
     ViewBag.Title = "OperForecast";
+    Layout = "~/Views/Shared/Lab_Layout.cshtml";
 }
 
-<h2>Forecast Operations</h2>
+<h2>OperForecast</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Assay.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Compound.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkOrder.Comments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuantityMG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateArrived)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceivedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateDue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Appearance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MolMass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AuthAddTest)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Assay.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Compound.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkOrder.Comments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuantityMG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateArrived)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReceivedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateDue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Appearance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MolMass)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AuthAddTest)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
