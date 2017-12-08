@@ -171,6 +171,7 @@
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\Material.cs" />
     <Compile Include="Models\NewTestTube.cs" />
+    <Compile Include="Models\OperationForecastCompoundSample.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Models\Report.cs" />

@@ -25,8 +25,8 @@ namespace firestorm.Controllers
         }
         public ActionResult OperForecast()
         {
-
-            return View();
+            List<OperationForecastCompoundSample> CompoundSamples = db.Database.SqlQuery<OperationForecastCompoundSample>("SELECT  OrderID, DateDue FROM CompoundSample WHERE ReceivedBY IS NULL GROUP BY OrderID, DateDue").ToList();
+            return View(CompoundSamples);
         }
         public ActionResult DisplayTests()
         {
