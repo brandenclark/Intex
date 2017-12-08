@@ -14,6 +14,9 @@ body
 {
     color: white !important;
 }
+.navbar .dropdown-menu a {
+        color: black !important;
+    }
 .navbar a:hover
 {
     color: rgb(5, 61, 111)  !important;
@@ -72,8 +75,3 @@ h2
     top:100px;
 }
 
-body
-{
-    color: aqua !important;
-    background-color: pink !important;
-}
