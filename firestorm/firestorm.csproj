@@ -273,6 +273,7 @@
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Customer\ViewOrder.cshtml" />
     <Content Include="Views\Lab\OperForecast.cshtml" />
+    <Content Include="Views\Home\UnderConstruction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
