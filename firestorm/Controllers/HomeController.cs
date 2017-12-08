@@ -150,6 +150,12 @@ namespace firestorm.Controllers
             return View(company);
         }
 
+        public ActionResult UnderConstruction()
+        {
+
+            return View();
+        }
+
 
     }
 }
