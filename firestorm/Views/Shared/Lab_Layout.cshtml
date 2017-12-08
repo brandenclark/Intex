@@ -27,7 +27,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
 
-                    <li>@Html.ActionLink("Receiving Order", "ReceivingOrder", "Lab")</li>
+                    <li>@Html.ActionLink("Receive Order", "UnderConstruction", "Home")</li>
 
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -36,8 +36,8 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="@Url.Action("DisplayTests", "Lab")">Schedule Test</a></li>
-                            <li><a href="@Url.Action("TestQueue", "Lab")">Test Queue</a></li>
-                            <li><a href="@Url.Action("UploadResults", "Lab")">Upload Results</a></li>
+                            <li><a href="@Url.Action("UnderConstruction", "Home")">Test Queue</a></li>
+                            <li><a href="@Url.Action("UnderConstruction", "Home")">Upload Results</a></li>
                         </ul>
                     </li>
                     <li>@Html.ActionLink("Forecast Operations", "OperForecast", "Lab")</li>
@@ -47,8 +47,9 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="@Url.Action("ManageTickets", "Lab")">Manage Tickets</a></li>
-                            <li><a href="@Url.Action("CreateTicket<", "Lab")">Create Ticket</a></li>
+                            <li><a href="@Url.Action("OperForecast", "Lab")">Work Orders en Route</a></li>
+                            <li><a href="@Url.Action("UnderConstruction", "Home")">Needed Materials</a></li>
+                            <li><a href="@Url.Action("UnderConstruction", "Home")">Tests en Route</a></li>
                         </ul>
                     </li>
                     <li>@Html.ActionLink("Manage Tickets", "ManageTickets", "Lab")</li>
